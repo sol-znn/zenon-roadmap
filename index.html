@@ -1,0 +1,267 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>The road to Phase 1 | Network of Momentum</title>
+  <meta name="description" content="A community plan for Network of Momentum Phase 1: what to build, in what order, and the decisions ahead.">
+  <meta name="theme-color" content="#141414">
+  <meta property="og:title" content="The road to Phase 1">
+  <meta property="og:description" content="A community plan for Network of Momentum Phase 1: what to build, in what order, and the decisions ahead.">
+  <meta property="og:type" content="website">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="assets/fonts/space-grotesk.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/jetbrains-mono.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="assets/style.css">
+  <script src="assets/app.js" defer></script>
+</head>
+<body>
+  <header class="top wrap">
+    <a class="brand" href="./" aria-label="The road to Phase 1, home">
+      <svg viewBox="0 0 32 32" width="28" height="28" aria-hidden="true">
+        <circle cx="16" cy="16" r="12" fill="none" stroke="currentColor" stroke-width="2.5" opacity=".35"/>
+        <path d="M16 4a12 12 0 0 1 12 12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+        <circle cx="28" cy="16" r="3" fill="currentColor"/>
+      </svg>
+      <span>Network of Momentum</span>
+    </a>
+    <p class="draft">Community draft, October 2026</p>
+  </header>
+
+  <main>
+    <section class="hero wrap" aria-labelledby="title">
+      <h1 id="title">The road to Phase&nbsp;1</h1>
+      <p class="lead">A community plan for the upgrades Network of Momentum needs to reach Phase 1: what to build, in what order, and what has to be decided first. Each step is checked against what other networks have learned since 2023.</p>
+
+      <div class="chain" aria-live="polite">
+        <div class="reading">
+          <p class="height-label">Momentum</p>
+          <p class="height num" id="height">14,332,979</p>
+          <p class="status" id="status"><span class="dot" aria-hidden="true"></span><span id="status-text">Connecting to a public node</span></p>
+        </div>
+
+        <div class="strip" id="strip" role="img" aria-label="The last 30 momentums"></div>
+        <p class="strip-note" id="strip-note">The last 30 momentums. A filled bar carried transactions.</p>
+
+        <div class="window">
+          <p>Network upgrades have been frozen since momentum <span class="num">13,243,712</span> (16 April 2026), when the community upgrade key expired. An open proposal would make the key usable again from momentum <span class="num next">14,567,887</span>.<sup><a href="#s4">4</a></sup></p>
+          <div class="bar" role="progressbar" aria-label="Progress from the freeze to the next upgrade window" aria-valuemin="0" aria-valuemax="100" id="bar"><span id="bar-fill"></span></div>
+          <p class="remaining" id="remaining">About 235,000 momentums to go.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="wrap" id="phase-1" aria-labelledby="h-phase-1">
+      <h2 id="h-phase-1">What Phase 1 is</h2>
+      <div class="prose">
+        <p>In November 2022 the team that launched Zenon described Phase 1 in three layers.<sup><a href="#s1">1</a></sup></p>
+        <dl class="layers">
+          <div><dt>Foundation</dt><dd>A faster and more secure core (networking, consensus, sync, fees), on-chain governance, smart contracts and security audits.</dd></div>
+          <div><dt>Access</dt><dd>Bridges and Bitcoin swaps, mobile and browser wallets, and decentralized exchanges.</dd></div>
+          <div><dt>Adoption</dt><dd>Hardware wallets and custody, an NFT standard, and marketing.</dd></div>
+        </dl>
+        <p>The post set no date. Phase 1 depends on what the ecosystem builds, not on time or price.<sup><a href="#s1">1</a></sup> Mr Kaine, who launched the network, later named five protocol milestones: a new consensus engine, dynamic plasma, interoperability, fast sync with zero-knowledge proofs, and a new networking layer.<sup><a href="#s2">2</a></sup></p>
+      </div>
+    </section>
+
+    <section class="wrap" id="today" aria-labelledby="h-today">
+      <h2 id="h-today">Where things stand</h2>
+      <ul class="prose facts">
+        <li>The latest release is go-zenon v0.0.8, from April 2025.<sup><a href="#s3">3</a></sup></li>
+        <li>Upgrades cannot be switched on. The community key expired and the original key's holder is unknown.<sup><a href="#s4">4</a>,<a href="#s5">5</a></sup></li>
+        <li>Atomic swaps (HTLC) and the bridge to Ethereum and BNB Chain are live.</li>
+        <li>Dynamic plasma and the new networking layer are written and merged into the test branch, but are not on mainnet.<sup><a href="#s3">3</a></sup></li>
+        <li>The chain is quiet: most momentums carry no transactions, as the bars above show.</li>
+      </ul>
+    </section>
+
+    <section class="wrap" id="plan" aria-labelledby="h-plan">
+      <h2 id="h-plan">The plan, in order</h2>
+      <p class="prose">Four stages, each building on the one before. Effort is in engineer-months (EM): one experienced developer for a month, including review and audits.</p>
+
+      <ol class="stages">
+        <li class="stage">
+          <h3><span class="num">1</span> Start now</h3>
+          <p class="stage-note">Needs no network upgrade.</p>
+          <ul class="steps">
+            <li><h4>Clean releases</h4><p>Builds anyone can reproduce, with vulnerability checks.</p><p class="effort num">1 to 2</p></li>
+            <li><h4>Bitcoin swaps</h4><p>Swap BTC for ZNN or any token using the HTLCs already on mainnet. Later it is also the fast way in and out beside the peg.</p><p class="effort num">2 to 3</p></li>
+            <li><h4>An identity for Sentinels</h4><p>Each Sentinel publishes a key and what it serves, with no change to the network. It comes before the peg, which will rely on Sentinels to relay Bitcoin.</p><p class="effort num">part of 6 to 10</p></li>
+            <li><h4>Smart contracts on a rollup</h4><p>An EVM rollup that reads its transactions from mainnet, with no change to the base layer.</p><p class="effort num">4 to 6</p></li>
+            <li><h4>Fast sync</h4><p>New nodes start from a verified snapshot in minutes.</p><p class="effort num">4 to 6</p></li>
+          </ul>
+        </li>
+        <li class="stage">
+          <h3><span class="num">2</span> Unlock upgrades</h3>
+          <p class="stage-note">Everything after this stage needs it.</p>
+          <ul class="steps">
+            <li><h4>Governance and multisig</h4><p>Pillars vote to switch upgrades on, and a shared multisig replaces single admin keys. Fastest route: reuse the community key once, to switch governance on, then retire it.<sup><a href="#s4">4</a></sup> Fallback: a hard fork.<sup><a href="#s5">5</a></sup></p><p class="effort num">4 to 6</p></li>
+          </ul>
+        </li>
+        <li class="stage">
+          <h3><span class="num">3</span> First upgrades</h3>
+          <p class="stage-note">Each one needs a Pillar vote.</p>
+          <ul class="steps">
+            <li><h4>Dynamic plasma</h4><p>Lifts the limit of 100 transactions per momentum, with separate prices for data and for computation.</p><p class="effort num">5 to 8</p></li>
+            <li><h4>New networking</h4><p>libp2p, for better peer discovery and connections.</p><p class="effort num">2 to 4</p></li>
+            <li><h4>Fast finality and light wallets</h4><p>Pillars sign each momentum, so it is final in seconds. Momentums carry a state summary that light wallets, the planned "Sentries", can check.<sup><a href="#s20">20</a></sup> It now comes before the peg: a test network showed that without it a long network split never heals.</p><p class="effort num">10 to 16</p></li>
+            <li><h4>zBTC peg</h4><p>Bitcoin held by a threshold key shared across Pillars, using FROST signatures.<sup><a href="#s15">15</a></sup> A Bitcoin light client inside the node checks every deposit, so nobody has to run a Bitcoin full node. It starts small, under a stated cap.</p><p class="effort num">8 to 13</p></li>
+            <li><h4>Bitcoin checkpoints</h4><p>Momentum hashes recorded on Bitcoin by the peg's own transactions, so old history cannot be rewritten.<sup><a href="#s12">12</a></sup></p><p class="effort num">2 to 4</p></li>
+            <li><h4>A paid job for Sentinels</h4><p>Sentinels serve archives and snapshots, their original role, relay Bitcoin for the peg, and are paid for the work the chain can see.<sup><a href="#s19">19</a></sup> They do not hold the peg's keys.</p><p class="effort num">6 to 10</p></li>
+          </ul>
+        </li>
+        <li class="stage">
+          <h3><span class="num">4</span> Later, when needed</h3>
+          <p class="stage-note">Each one starts when demand justifies the work.</p>
+          <ul class="steps">
+            <li><h4>Proof-checked rollup</h4><p>The base layer checks rollup proofs, so withdrawals no longer depend on a committee.</p><p class="effort num">14 to 24</p></li>
+            <li><h4>Quantum-safe accounts</h4><p>A new signature type, ML-DSA,<sup><a href="#s21">21</a></sup> with a published deadline for moving old keys.<sup><a href="#s22">22</a></sup></p><p class="effort num">8 to 12</p></li>
+            <li><h4>New consensus</h4><p>All Pillars propose blocks at once, with sub-second confirmation. Decided in late 2028, based on demand.</p><p class="effort num">30 to 50</p></li>
+            <li><h4>Zero-knowledge sync</h4><p>Phones check the whole chain from one proof.</p><p class="effort num">12 to 20</p></li>
+          </ul>
+        </li>
+      </ol>
+      <p class="prose total">About <span class="num">110 to 185</span> engineer-months in total, plus <span class="num">15 to 30</span> for wallets, hardware signing and a DEX, funded through Accelerator-Z. With three small teams, most of it can land by mid-2029.</p>
+    </section>
+
+    <section class="wrap" id="changes" aria-labelledby="h-changes">
+      <h2 id="h-changes">What we would change</h2>
+      <p class="prose">The 2020 whitepaper<sup><a href="#s23">23</a></sup> and Mr Kaine's 2022 to 2023 guidance still hold on most points. Four mechanisms have better options now.</p>
+      <div class="swaps-head" aria-hidden="true"><span>Original</span><span>Instead</span><span>Why</span></div>
+      <ul class="swaps">
+        <li>
+          <p class="was"><span class="vh">Original: </span>Narwhal and Tusk consensus</p>
+          <p class="now"><span class="vh">Instead: </span>Mysticeti, or Mahi-Mahi to stay fully asynchronous</p>
+          <p class="why"><span class="vh">Why: </span>Sui replaced its Narwhal-based consensus with Mysticeti in 2024,<sup><a href="#s6">6</a></sup> and IOTA adopted it in 2025.<sup><a href="#s7">7</a></sup> Mahi-Mahi is the asynchronous successor to Tusk.<sup><a href="#s8">8</a></sup></p>
+        </li>
+        <li>
+          <p class="was"><span class="vh">Original: </span>RandomX proof of work</p>
+          <p class="now"><span class="vh">Instead: </span>Equi-X</p>
+          <p class="why"><span class="vh">Why: </span>RandomX needs up to 15 milliseconds and 256 MB to check one hash.<sup><a href="#s9">9</a></sup> Equi-X needs about 50 microseconds and 2 MB, and has protected Tor since 2023.<sup><a href="#s10">10</a></sup></p>
+        </li>
+        <li>
+          <p class="was"><span class="vh">Original: </span>Extension chains run by Pillars</p>
+          <p class="now"><span class="vh">Instead: </span>Rollups checked by the base layer</p>
+          <p class="why"><span class="vh">Why: </span>The Cosmos Hub is removing its shared-security system after consumer chains left and the expected revenue did not arrive.<sup><a href="#s11">11</a></sup></p>
+        </li>
+        <li>
+          <p class="was"><span class="vh">Original: </span>Merge-mined proof of work for security</p>
+          <p class="now"><span class="vh">Instead: </span>Timestamps on Bitcoin</p>
+          <p class="why"><span class="vh">Why: </span>They stop long-range attacks without paying miners.<sup><a href="#s12">12</a></sup></p>
+        </li>
+      </ul>
+      <p class="prose">Two decisions also follow. Confirmations should be fast and final, as the planned consensus engine already is and as Solana voted to adopt in 2025.<sup><a href="#s13">13</a></sup> Privacy should be opt-in and live on the rollup, because from July 2027 EU exchanges may not offer privacy coins.<sup><a href="#s14">14</a></sup> And the zBTC vault should use FROST, not the older GG20 scheme whose flaw cost THORChain $10.7 million in May 2026.<sup><a href="#s16">16</a></sup></p>
+    </section>
+
+    <section class="wrap" id="schedule" aria-labelledby="h-schedule">
+      <h2 id="h-schedule">Schedule</h2>
+      <p class="prose">Targets, not promises. Every step after governance waits for a Pillar vote.</p>
+      <figure class="gantt">
+        <div class="gantt-scroll">
+<pre class="mermaid" aria-label="Schedule of the plan, October 2026 to June 2029">
+gantt
+  dateFormat YYYY-MM-DD
+  axisFormat %b %Y
+  tickInterval 6month
+  section Unlock
+  Release v0.0.9 :u1, 2026-10-05, 2026-11-02
+  Upgrade window opens :crit, milestone, u2, 2026-11-03, 0d
+  Governance and multisig :u3, 2026-11-03, 2027-05-15
+  section Core
+  Dynamic plasma and libp2p :c1, 2027-01-04, 2027-08-15
+  Finality and light wallets :c2, 2027-06-01, 2028-06-30
+  Consensus decision :milestone, c3, 2028-12-15, 0d
+  section Bitcoin
+  Bitcoin swaps :b1, 2026-10-15, 2027-03-31
+  Sentinel identity and relay :b0, 2027-01-04, 2027-09-30
+  zBTC peg, built and audited :b2, 2027-04-01, 2028-03-31
+  Bitcoin checkpoints :b3, 2027-10-01, 2028-06-30
+  zBTC peg live :milestone, b5, 2028-09-15, 0d
+  Sentinels paid to relay :b4, 2028-09-15, 2028-12-15
+  section Contracts
+  Rollup on mainnet :e1, 2026-10-15, 2027-03-31
+  Snapshot sync :e2, 2027-04-01, 2027-09-30
+  Proof-checked rollup :e3, 2028-01-15, 2029-06-30
+  Quantum-safe accounts :e4, 2027-07-01, 2029-06-30
+  section Wallets
+  Mobile wallet :x1, 2027-01-04, 2027-09-30
+  Hardware wallet signing :x2, 2027-04-01, 2027-12-15
+  Light wallets :x3, 2028-07-01, 2028-12-15
+</pre>
+        </div>
+        <figcaption>The pink marker is the next decision. The blue line is today.</figcaption>
+      </figure>
+    </section>
+
+    <section class="wrap" id="decisions" aria-labelledby="h-decisions">
+      <h2 id="h-decisions">Decision points</h2>
+      <ul class="gates">
+        <li>
+          <p class="when num next">About 1 Nov 2026</p>
+          <p class="ask">Are most Pillars running v0.0.9 when the upgrade window opens?</p>
+          <p class="yes">Yes: governance switches on around mid-2027.</p>
+          <p class="no">No: governance needs a hard fork, about six months later.</p>
+        </li>
+        <li>
+          <p class="when num">May 2027</p>
+          <p class="ask">Do dynamic plasma and libp2p run cleanly on testnet for eight weeks?</p>
+          <p class="yes">Yes: Pillars vote to switch them on.</p>
+          <p class="no">No: fix and test again.</p>
+        </li>
+        <li>
+          <p class="when num">Dec 2027</p>
+          <p class="ask">Has a BitVM2 bridge, which needs only one honest operator, run for a year without loss?<sup><a href="#s17">17</a></sup></p>
+          <p class="yes">Yes: once finality is live, design a way for a large reserve to move to it.</p>
+          <p class="no">No: keep the Pillar vault under its cap.</p>
+        </li>
+        <li>
+          <p class="when num">Each quarter</p>
+          <p class="ask">Has the Lightning Network shipped <span class="nowrap">PTLCs?<sup><a href="#s18">18</a></sup></span></p>
+          <p class="yes">Yes: add a Lightning leg to the private swap, which is already built for on-chain bitcoin.</p>
+          <p class="no">No: nothing waits.</p>
+        </li>
+        <li>
+          <p class="when num">Dec 2028</p>
+          <p class="ask">Is mainnet busy (over about 50 transactions per momentum), or does an app need sub-second finality?</p>
+          <p class="yes">Yes: build the new consensus.</p>
+          <p class="no">No: check again in a year.</p>
+        </li>
+      </ul>
+    </section>
+
+    <section class="wrap" id="sources" aria-labelledby="h-sources">
+      <h2 id="h-sources">Sources</h2>
+      <ol class="sources">
+        <li id="s1">Zenon. <a href="https://medium.com/@zenon.network/towards-nom-phase-1-global-scale-global-adoption-9046ec78218d">Towards NoM Phase 1: Global Scale, Global Adoption</a>. Medium, 24 November 2022.</li>
+        <li id="s2">Mr Kaine. <a href="https://t.me/zenonnetwork/275986">Message on Phase 1 milestones</a>. Zenon Telegram, 28 March 2023.</li>
+        <li id="s3">zenon-network. <a href="https://github.com/zenon-network/go-zenon/releases">go-zenon releases</a>, and <a href="https://github.com/zenon-network/go-zenon/pull/73">pull request 73</a>, which merged dynamic plasma and libp2p into the test branch. GitHub.</li>
+        <li id="s4">zenon-network. <a href="https://github.com/zenon-network/go-zenon/pull/101">go-zenon pull request 101: community spork address renewal window</a>. GitHub, September 2026.</li>
+        <li id="s5"><a href="https://forum.hypercore.one/t/draft-governance-zip-working-draft-for-comment/935">Draft Governance ZIP</a>. HyperCore One forum, 2026.</li>
+        <li id="s6">Sui. <a href="https://www.sui.io/blog/mysticeti-consensus-reduce-latency">Mysticeti consensus</a>. 2024.</li>
+        <li id="s7">IOTA Foundation. <a href="https://blog.iota.org/iota-rebased-technical-view/">IOTA Rebased, a technical view</a>. 2025.</li>
+        <li id="s8">Jovanovic and others. <a href="https://arxiv.org/abs/2410.08670">Mahi-Mahi: low-latency asynchronous BFT DAG-based consensus</a>. ICDCS 2025.</li>
+        <li id="s9">Tor Project. <a href="https://tpo.pages.torproject.net/core/doc/tor/md_ext_equix_devlog.html">Equi-X development notes</a>, on RandomX verification cost.</li>
+        <li id="s10">Tor Project. <a href="https://blog.torproject.org/introducing-proof-of-work-defense-for-onion-services">Introducing proof-of-work defense for onion services</a>. August 2023.</li>
+        <li id="s11">Cosmos Hub forum. <a href="https://forum.cosmos.network/t/remove-ics-from-the-cosmos-hub-software-upgrades-to-follow/16682">Remove ICS from the Cosmos Hub</a>. February 2026.</li>
+        <li id="s12">Babylon Labs. <a href="https://docs.babylonlabs.io/guides/research/btc_timestamping">Bitcoin timestamping</a>.</li>
+        <li id="s13">Chainstack. <a href="https://docs.chainstack.com/docs/solana-alpenglow-consensus">Solana Alpenglow consensus</a>.</li>
+        <li id="s14">European Union. <a href="https://eur-lex.europa.eu/eli/reg/2024/1624/oj">Regulation (EU) 2024/1624</a>, Article 79.</li>
+        <li id="s15">IETF. <a href="https://www.rfc-editor.org/rfc/rfc9591.html">RFC 9591: the FROST protocol</a>. June 2024.</li>
+        <li id="s16">THORChain. <a href="https://thorchain.org/blog/thorchain-exploit-report-1">Exploit report</a>. May 2026.</li>
+        <li id="s17">Citrea and others. <a href="https://eprint.iacr.org/2025/776">Clementine, a BitVM2 bridge</a>. 2025.</li>
+        <li id="s18">t-bast. <a href="https://github.com/t-bast/lightning-docs/blob/398a1b78250f564f7c86a414810f7e87e5af23ba/taproot-updates.md">Lightning taproot updates</a>, where PTLCs are the last step.</li>
+        <li id="s19">Zenon. <a href="https://medium.com/@zenon.network/network-of-momentum-the-decentralized-self-evolving-superorganism-fad1de21868">Network of Momentum, the decentralized self-evolving superorganism</a>. Medium, 8 November 2021.</li>
+        <li id="s20">Zenon. <a href="https://medium.com/@zenon.network/zenon-community-generated-ama-alphanet-edition-d89941e3906d">Community AMA, Alphanet edition</a>. Medium, 5 October 2021.</li>
+        <li id="s21">NIST. <a href="https://csrc.nist.gov/pubs/fips/204/final">FIPS 204: ML-DSA</a>. August 2024.</li>
+        <li id="s22">Lopp and Papathanasiou. <a href="https://bips.dev/361/">BIP-361: post-quantum migration and legacy signature sunset</a>. 2025.</li>
+        <li id="s23">The Zenon Team. <a href="https://github.com/ATSocy/Z-INDEX/blob/a683cd89ac35dc141b42b8cb1880f03e46dc8573/knowledge-base/whitepaper/whitepaper.pdf">Network of Momentum whitepaper, draft 0.1</a>. March 2020.</li>
+      </ol>
+    </section>
+  </main>
+
+  <footer class="wrap foot">
+    <p>A community draft, not an official Zenon plan. Pillars have not agreed to it. Updated 3 October 2026.</p>
+    <p>Live data comes from the public nodes at node.zenonhub.io and my.hc1node.com.</p>
+  </footer>
+</body>
+</html>
